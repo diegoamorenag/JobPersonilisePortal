@@ -1,18 +1,31 @@
 const express = require('express');
 const router = express.Router();
-const ScraperController = require('../controllers/scraper.controller');
-const { authenticate, isAdmin } = require('../middleware/auth');
+const scraperController = require('../controllers/scraperController');
 
-router.use(authenticate);
+/**
+ * Scraper Routes
+ * /api/scraper
+ */
 
-// User can trigger scraping for their sources
-router.post('/trigger', ScraperController.triggerScraping);
-router.get('/status', ScraperController.getScrapingStatus);
-router.get('/history', ScraperController.getScrapingHistory);
+// Get all available scrapers
+router.get('/', scraperController.getScrapers);
 
-// Admin only
-router.post('/trigger-all', isAdmin, ScraperController.triggerAllSources);
-router.get('/logs', isAdmin, ScraperController.getScraperLogs);
-router.delete('/jobs/cleanup', isAdmin, ScraperController.cleanupOldJobs);
+// Run a specific scraper
+router.post('/:scraperName/run', scraperController.runScraper);
+
+// Run multiple scrapers
+router.post('/run-multiple', scraperController.runMultipleScrapers);
+
+// Get active scrapes
+router.get('/active', scraperController.getActiveScrapes);
+
+// Get scrape history
+router.get('/history', scraperController.getScrapeHistory);
+
+// Get statistics
+router.get('/stats', scraperController.getStatistics);
+
+// Clear history
+router.delete('/history', scraperController.clearHistory);
 
 module.exports = router;
