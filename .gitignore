@@ -1,18 +1,11 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+# hide all hidden files
+.* 
+# exception .gitignore .env.example
+!.gitignore 
+!.env.example
 
-# Other files and folders
-.settings/
+node_modules
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+#let me be a bad programmer in peace, u not allowed to judge
+CLAUDE.md 
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
